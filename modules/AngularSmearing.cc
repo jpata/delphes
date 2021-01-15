@@ -104,8 +104,8 @@ void AngularSmearing::Process()
   {
     const TLorentzVector &candidatePosition = candidate->Position;
     const TLorentzVector &candidateMomentum = candidate->Momentum;
-    eta = candidatePosition.Eta();
-    phi = candidatePosition.Phi();
+    eta = candidateMomentum.Eta();
+    phi = candidateMomentum.Phi();
     pt = candidateMomentum.Pt();
     e = candidateMomentum.E();
 
@@ -118,8 +118,6 @@ void AngularSmearing::Process()
 
     mother = candidate;
     candidate = static_cast<Candidate *>(candidate->Clone());
-    eta = candidateMomentum.Eta();
-    phi = candidateMomentum.Phi();
     candidate->Momentum.SetPtEtaPhiE(pt, eta, phi, pt * TMath::CosH(eta));
     candidate->AddCandidate(mother);
 
